@@ -21,7 +21,7 @@ jobs:
           git config --global user.name 'thororen1234'
           git config --global user.email '78185467+thororen1234@users.noreply.github.com'
           git reset --hard
-          git fetch
+          git fetch upstream
           git merge upstream/main
             
       - name: Replace Urls
