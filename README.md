@@ -32,8 +32,16 @@ Special thanks to:
 
 [p0rtl](https://github.com/p0rtL6) with her project [usrbg](https://github.com/Discord-Custom-Covers/usrbg), which was the inspiration for UserPFP.
 
-[thororen](https://github.com/thororen1234) with [Equicord](https://github.com/Equicord/Equicord), which adds features from Vencord pull requests that aren't processed allowing UserPFP to get its deserved plugin.
+[thororen](https://github.com/thororen1234) with [Equicord](https://github.com/Equicord/Equicord), which adds features from Vencord pull requests including UserPFP.
 
 ## Legal
 
 UserPFP contains user-generated content, which we give our best efforts to scan for copyrighted material or otherwise disallowed content. We can not guarantee a 100% accurate filter, if you find a copyright work or otherwise disallowed content in our database, please open an issue in this or the database repository to notify the team.
+
+## Privacy Policy
+
+Click [here](https://github.com/thororen1234/UserPFP/blob/main/docs/privacypolicy.md)
+
+## Terms of Service
+
+Click [here](https://github.com/thororen1234/UserPFP/blob/main/docs/termsofservice.md)

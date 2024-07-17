@@ -11,19 +11,19 @@
     "watch": "replugged build theme --watch",
     "bundle": "replugged bundle theme",
     "release": "replugged release",
-    "lint": "prettier ./src --check",
-    "lint:fix": "prettier ./src --write"
+    "lint": "prettier ../theme-stuff --check",
+    "lint:fix": "prettier ../theme-stuff --write"
   },
   "keywords": [],
   "author": [
     {
-        "name": "foxstorm1",
-        "discordID": "789872551731527690",
-        "github": "Yeetov"
+      "name": "foxstorm1",
+      "discordID": "789872551731527690",
+      "github": "Yeetov"
     },
     {
-        "name": "Pikai",
-        "github": "beudave"
+      "name": "Pikai",
+      "github": "beudave"
     }
   ],
   "license": "GPL 3.0",

@@ -4,8 +4,6 @@
 
 This is the file that dist.css is built from. Badges and avatars are based on user ID, more in template.css
 
-The data file is now formatted differently. All files must be uploaded to coolesding's repository correctly. How to do that is shown in the [readme there](https://github.com/coolesding/hosting/blob/main/README.md). All user ID's will point towards this repository, unless there is more behind it than just image hosting (For example shiggy.fun, it will display a random image each time the link is requested).
-
 ## dist.css
 
 This is the CSS code users import, here the data from data.json is used according to template.css.
@@ -22,6 +20,6 @@ Example:
 }
 ```
 
-Would then build the dist.css in a way that would display: none, so hide, every avatar from a user that has the import to dist.css
+This would then be built into dist.css in which it would hide every avatar from a user that has the import from dist.css
 
-of course this exact line wouldn't work because it would be to easy, thats why the selectors in this file are so long lol.
+Check [here](https://github.com/thororen1234/UserPFP/blob/main/source/template.css) to see a proper selector.
