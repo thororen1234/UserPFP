@@ -22,7 +22,7 @@ jobs:
           git config --global user.email '78185467+thororen1234@users.noreply.github.com'
           git reset --hard
           git fetch --all
-          git merge upstream/main
+          git merge origin
             
       - name: Replace Urls
         run: |
@@ -38,5 +38,5 @@ jobs:
 
             git commit -m "Replace URL"
 
-            git push origin
+            git push main
                 
