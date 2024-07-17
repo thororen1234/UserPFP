@@ -25,14 +25,9 @@ jobs:
           git remote add upstream 'https://github.com/UserPFP/UserPFP.git'
           # Fetch Remote
           git fetch upstream
-          # Checkout Main
-          git checkout main
-          # Push Remote Main By Force
+          # Revert These Files
           git checkout upstream/main source/data.json
           git checkout upstream/main import.css
-          git add 'source/data.json' 'import.css'
-          git commit - 'Revert For Replacement'
-          git push origin
 
       - name: Get URL Amount
         id: replaced
