@@ -5,8 +5,8 @@ env:
     UPSTREAM_URL: "https://github.com/UserPFP/UserPFP.git"
     UPSTREAM_BRANCH: "main"
     DOWNSTREAM_BRANCH: "main"
-    URL: https://raw.githubusercontent.com/UserPFP/img/main/
-    REPLACE: https://userpfp.thororen.com/UserPFP-img/
+    URL: "https://raw.githubusercontent.com/UserPFP/img/main/"
+    REPLACE: "https://userpfp.thororen.com/UserPFP-img/"
 
 on:
     schedule:
@@ -28,7 +28,6 @@ jobs:
             
       - name: Replace Urls
         run: |
-            git fetch origin
             git config --global user.name 'thororen1234'
             git config --global user.email '78185467+thororen1234@users.noreply.github.com'
 
@@ -37,9 +36,9 @@ jobs:
                 sed -i "s|${URL}|${REPLACE}|g" "source/data.json"
             done
 
-            git add "${FILE}"
+            git add "source/data.json"
 
-            git commit -m "Replace Intended Asset Server URL"
+            git commit -m "Replace URL"
 
-            git push origin main
+            git push main
                 
