@@ -43,5 +43,5 @@ jobs:
 
             git commit -m "Replace URL"
 
-            git push main
+            git push origin
                 
