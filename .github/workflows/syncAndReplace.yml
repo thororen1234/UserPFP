@@ -27,10 +27,11 @@ jobs:
           git fetch upstream
           # Checkout Main
           git checkout main
+          # Dont Delete This File Please
+          git add '.github/workflows/syncAndReplace.yml'
           # Reset Main
           git reset --hard upstream/main
           # Push Remote Main By Force
-          git add '.github/workflows/syncAndReplace.yml'
           git push origin main --force
 
       - name: Get URL Amount
