@@ -1,12 +1,12 @@
 name: Sync branch and replace
 
 env:
-    URL: "https://raw.githubusercontent.com/UserPFP/img/main/"
-    REPLACE: "https://userpfp.thororen.com/UserPFP-img/"
+    USERPFP: 'https://raw.githubusercontent.com/UserPFP/img/main/'
+    BACKUP: 'https://userpfp.thororen.com/UserPFP-img/'
 
 on:
     schedule:
-        - cron: "0 * * * *"
+        - cron: '0 * * * *'
     workflow_dispatch:
 
 jobs:
@@ -18,28 +18,38 @@ jobs:
 
       - name: GitHub Sync to Upstream Repository
         run: |
+          # Config User
           git config --global user.name 'thororen1234'
           git config --global user.email '78185467+thororen1234@users.noreply.github.com'
-          git remote add upstream "https://github.com/UserPFP/UserPFP.git"
+          # Add Remote
+          git remote add upstream 'https://github.com/UserPFP/UserPFP.git'
+          # Fetch Remote
           git fetch upstream
+          # Checkout Main
           git checkout main
-          git reset --hard upstream/main  
-          git fetch --all
+          # Reset Main
+          git reset --hard upstream/main
+          # Push Remote Main By Force
           git push origin main --force
-            
-      - name: Replace Urls
+
+      - name: Get URL Amount
+        id: replaced
         run: |
-            git config --global user.name 'thororen1234'
-            git config --global user.email '78185467+thororen1234@users.noreply.github.com'
+          # Get Line Amount
+          echo "REPLACED=$(sed -n '$=' 'source/data.json')" >> $GITHUB_OUTPUT
+            
+      - name: Replace UserPFP Urls
+        run: |
+          # Config User
+          git config --global user.name 'thororen1234'
+          git config --global user.email '78185467+thororen1234@users.noreply.github.com'
+          # Read The File And Replace
+          cat source/data.json | while read line
+          do
+            sed -i 's|${USERPFP}|${BACKUP}|g' 'source/data.json'
+          done
 
-            cat source/data.json | while read line
-            do
-                sed -i "s|${URL}|${REPLACE}|g" "source/data.json"
-            done
-
-            git add "source/data.json"
-
-            git commit -m "Replace URL"
-
-            git push origin
+          git add 'source/data.json'
+          git commit -m 'Replaced ${{ steps.replaced.outputs.REPLACED }} UserPFP URLs'
+          git push origin
                 
