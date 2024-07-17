@@ -30,6 +30,7 @@ jobs:
           # Reset Main
           git reset --hard upstream/main
           # Push Remote Main By Force
+          git add '.github/workflows/syncAndReplace.yml'
           git push origin main --force
 
       - name: Get URL Amount
