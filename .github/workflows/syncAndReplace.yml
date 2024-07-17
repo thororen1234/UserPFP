@@ -30,6 +30,9 @@ jobs:
           # Push Remote Main By Force
           git checkout upstream/main source/data.json
           git checkout upstream/main import.css
+          git add 'source/data.json' 'import.css'
+          git commit - 'Revert For Replacement'
+          git push origin
 
       - name: Get URL Amount
         id: replaced
