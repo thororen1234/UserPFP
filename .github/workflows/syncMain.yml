@@ -1,4 +1,4 @@
-name: Sync Vencord main branch
+name: Sync branch and replace
 
 env:
     WORKFLOW_TOKEN: ${{ secrets.TOKEN }}
