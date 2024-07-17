@@ -20,9 +20,9 @@ jobs:
         run: |
           git config --global user.name 'thororen1234'
           git config --global user.email '78185467+thororen1234@users.noreply.github.com'
-          git reset --hard
+          git pull --unshallow
           git fetch --all
-          git merge origin
+          git merge --force upstream/main
             
       - name: Replace Urls
         run: |
