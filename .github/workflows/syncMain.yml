@@ -20,10 +20,12 @@ jobs:
         run: |
           git config --global user.name 'thororen1234'
           git config --global user.email '78185467+thororen1234@users.noreply.github.com'
-          git reset --hard
-          git pull --unshallow
+          git remote add upstream "https://github.com/UserPFP/UserPFP.git"
+          git fetch upstream
+          git checkout main
+          git reset --hard upstream/main  
           git fetch --all
-          git merge upstream/main
+          git push origin main --force
             
       - name: Replace Urls
         run: |
@@ -39,5 +41,5 @@ jobs:
 
             git commit -m "Replace URL"
 
-            git push main
+            git push origin
                 
