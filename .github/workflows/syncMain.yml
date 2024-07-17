@@ -1,10 +1,6 @@
 name: Sync branch and replace
 
 env:
-    WORKFLOW_TOKEN: ${{ secrets.TOKEN }}
-    UPSTREAM_URL: "https://github.com/UserPFP/UserPFP.git"
-    UPSTREAM_BRANCH: "main"
-    DOWNSTREAM_BRANCH: "main"
     URL: "https://raw.githubusercontent.com/UserPFP/img/main/"
     REPLACE: "https://userpfp.thororen.com/UserPFP-img/"
 
@@ -21,13 +17,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: GitHub Sync to Upstream Repository
-        id: sync
-        uses: verticalsync/sync-upstream-repo@master
-        with:
-            upstream_repo: ${{ env.UPSTREAM_URL }}
-            upstream_branch: ${{ env.UPSTREAM_BRANCH }}
-            downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
-            token: ${{ env.WORKFLOW_TOKEN }}
+        run: |
+          git config --global user.name 'thororen1234'
+          git config --global user.email '78185467+thororen1234@users.noreply.github.com'
+          git pull --unshallow
+          git remote add upstream "https://github.com/UserPFP/UserPFP.git"
+          git fetch upstream/main
+          git merge --force upstream/main
             
       - name: Replace Urls
         run: |
