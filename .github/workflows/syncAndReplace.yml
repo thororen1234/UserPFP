@@ -40,7 +40,7 @@ jobs:
           # Revert These Files
           git checkout upstream/main source/data.json
           git checkout upstream/main import.css
-          git add 'source/data.json' 'import.css'
+          git add .
           git commit - 'Revert For Replacement'
           git push origin
 
@@ -67,7 +67,7 @@ jobs:
 
           cp import.css source/dist.css
 
-          git add 'source/data.json' 'import.css' 'source/dist.css'
+          git add .
           git commit -m 'Replaced ${{ steps.replaced.outputs.REPLACED }} UserPFP URLs'
           git push origin
                 
