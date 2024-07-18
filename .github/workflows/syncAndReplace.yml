@@ -40,19 +40,12 @@ jobs:
           # Revert These Files
           git checkout upstream/main source/data.json
           git checkout upstream/main import.css
-          git add .
-          git commit - 'Revert For Replacement'
-          git push origin
 
       - name: Get URL Amount
         id: replaced
         run: |
           # Get Line Amount
           echo "REPLACED=$(sed -n '$=' 'source/data.json')" >> $GITHUB_OUTPUT
-
-      - name: Run generate script
-        working-directory: .github/scripts
-        run: pnpm run generate
             
       - name: Replace UserPFP Urls
         run: |
@@ -65,8 +58,13 @@ jobs:
             sed -i 's|${USERPFP}|${BACKUP}|g' 'source/data.json'
           done
 
-          cp import.css source/dist.css
+      - name: Run generate script
+        working-directory: .github/scripts
+        run: pnpm run generate
 
+      - name: Finish
+        run: |
+          cp import.css source/dist.css
           git add .
           git commit -m 'Replaced ${{ steps.replaced.outputs.REPLACED }} UserPFP URLs'
           git push origin
