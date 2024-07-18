@@ -28,19 +28,6 @@ jobs:
           npm i -g pnpm
           pnpm i
 
-      - name: GitHub Sync to Upstream Repository
-        run: |
-          # Config User
-          git config --global user.name 'thororen1234'
-          git config --global user.email '78185467+thororen1234@users.noreply.github.com'
-          # Add Remote
-          git remote add upstream 'https://github.com/UserPFP/UserPFP.git'
-          # Fetch Remote
-          git fetch upstream
-          # Revert These Files
-          git checkout upstream/main source/data.json
-          git checkout upstream/main import.css
-
       - name: Get URL Amount
         id: replaced
         run: |
