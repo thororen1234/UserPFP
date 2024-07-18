@@ -1,58 +1,34 @@
 name: Sync branch and replace
 
 env:
-    USERPFP: 'https://raw.githubusercontent.com/UserPFP/img/main/'
-    BACKUP: 'https://userpfp.thororen.com/UserPFP-img/'
+    URL: "https://raw.githubusercontent.com/UserPFP/img/main/"
+    REPLACE: "https://userpfp.thororen.com/UserPFP-img/"
 
 on:
     schedule:
-        - cron: '0 * * * *'
+        - cron: "0 * * * *"
     workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - name: Setup PNPM
-        working-directory: .github/scripts
-        run: |
-          npm i -g pnpm
-          pnpm i
-
-      - name: Get URL Amount
-        id: replaced
-        run: |
-          # Get Line Amount
-          echo "REPLACED=$(sed -n '$=' 'source/data.json')" >> $GITHUB_OUTPUT
             
-      - name: Replace UserPFP Urls
+      - name: Replace Urls
         run: |
-          # Config User
-          git config --global user.name 'thororen1234'
-          git config --global user.email '78185467+thororen1234@users.noreply.github.com'
-          # Read The File And Replace
-          cat source/data.json | while read line
-          do
-            sed -i 's|${USERPFP}|${BACKUP}|g' 'source/data.json'
-          done
+            git config --global user.name 'thororen1234'
+            git config --global user.email '78185467+thororen1234@users.noreply.github.com'
 
-      - name: Run generate script
-        working-directory: .github/scripts
-        run: pnpm run generate
+            cat source/data.json | while read line
+            do
+                sed -i "s|${URL}|${REPLACE}|g" "source/data.json"
+            done
 
-      - name: Finish
-        run: |
-          cp import.css source/dist.css
-          git add .
-          git commit -m 'Replaced ${{ steps.replaced.outputs.REPLACED }} UserPFP URLs'
-          git push origin
+            git add "source/data.json"
+
+            git commit -m "Replace URL"
+
+            git push origin
                 
