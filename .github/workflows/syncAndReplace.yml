@@ -12,23 +12,60 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-            
-      - name: Replace Urls
-        run: |
-            git config --global user.name 'thororen1234'
-            git config --global user.email '78185467+thororen1234@users.noreply.github.com'
 
-            cat source/data.json | while read line
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Setup PNPM
+        working-directory: .github/scripts
+        run: |
+          npm i -g pnpm
+          pnpm i
+
+      - name: GitHub Sync to Upstream Repository
+        run: |
+          # Config User
+          git config --global user.name 'thororen1234'
+            git config --global user.email '78185467+thororen1234@users.noreply.github.com'
+          # Add Remote
+          git remote add upstream 'https://github.com/UserPFP/UserPFP.git'
+          # Fetch Remote
+          git fetch upstream
+          # Revert These Files
+          git checkout upstream/main source/data.json
+          git checkout upstream/main import.css
+
+      - name: Get URL Amount
+        id: replaced
+        run: |
+          # Get Line Amount
+          echo "REPLACED=$(sed -n '$=' 'source/data.json')" >> $GITHUB_OUTPUT
+            
+      - name: Replace UserPFP Urls
+        run: |
+          # Config User
+          git config --global user.name 'thororen1234'
+          git config --global user.email '78185467+thororen1234@users.noreply.github.com'
+          # Read The File And Replace
+          cat source/data.json | while read line
             do
                 sed -i "s|${URL}|${REPLACE}|g" "source/data.json"
             done
 
-            git add "source/data.json"
+      - name: Run generate script
+        working-directory: .github/scripts
+        run: pnpm run generate
 
-            git commit -m "Replace URL"
-
-            git push origin
+      - name: Finish
+        run: |
+          cp "import.css" "source/dist.css"
+          git add .
+          git commit -m 'Replaced ${{ steps.replaced.outputs.REPLACED }} UserPFP URLs'
+          git push origin
                 
