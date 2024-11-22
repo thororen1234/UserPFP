@@ -2,7 +2,7 @@ name: Sync branch and replace
 
 env:
     URL: "https://raw.githubusercontent.com/UserPFP/img/main/"
-    REPLACE: "https://userpfp.thororen.com/UserPFP-img/"
+    REPLACE: "https://userpfp.thororen.com/"
 
 on:
     schedule:
